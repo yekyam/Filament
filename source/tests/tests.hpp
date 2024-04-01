@@ -1,10 +1,15 @@
 #pragma once
 
+// veryyyy hacky, but works
+#define private public
+
 #include "../include/Components.hpp"
 #include "../include/EntityManager.hpp"
 #include "../include/Filament.hpp"
 #include "../include/GameState.hpp"
 #include "../include/Macros.hpp"
+
+#undef private
 
 namespace Tests {
 /* Tests List:
@@ -14,6 +19,7 @@ namespace Tests {
  *  - do not be able to add two component of the same type to one entity
  *  - destory an entity
  *  - check if an entity exists
+ *  - check if deleted entity is free of vecs
  */
 
 bool test_null_test()
@@ -95,6 +101,33 @@ bool test_add_duplicate_component_to_entity()
 		return false;
 	}
 
+	return true;
+}
+
+// Component vecs should not have values at deleted entity index
+bool test_deleted_entity_components_are_gone()
+{
+	EntityManager world(1);
+	auto e = world.get_new_entity();
+
+	if (!e.has_value())
+	{
+		return false;
+	}
+
+	auto return_code = world.add_component_to_entity(*e, Mesh{std::vector<Vertex>{}, std::vector<GLushort>{}});
+	if (return_code != EntityManager::EntityManagerErrors::Success)
+	{
+		return false;
+	}
+
+	world.destroy_entity(*e);
+	auto mesh_components = world.game_state.components[typeid(Mesh).name()];
+
+	if (mesh_components[*e].has_value())
+	{
+		return false;
+	}
 	return true;
 }
 

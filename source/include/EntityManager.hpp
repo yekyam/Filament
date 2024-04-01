@@ -12,6 +12,7 @@ using EntityHandle = uint32_t;
 
 class EntityManager
 {
+    private:
 	uint32_t num_entities;
 	uint32_t max_entities;
 	std::deque<EntityHandle> available_handles;

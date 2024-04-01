@@ -40,7 +40,7 @@ void EntityManager::destroy_entity(EntityHandle e)
 {
 	/* iterate over every component vec and set vec[e] = nullopt
 	 */
-	for (auto it : this->game_state.components)
+	for (auto &it : this->game_state.components)
 	{
 		it.second[e] = std::nullopt;
 	}
