@@ -5,7 +5,7 @@ using namespace Tests;
 
 int main()
 {
-	Tester tester(4);
+	Tester tester;
 
 	tester.add_test("Create Single Entity", test_create_single_entity);
 	tester.add_test("Entity Existence", test_entity_exists);

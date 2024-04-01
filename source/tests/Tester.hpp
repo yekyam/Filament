@@ -24,11 +24,6 @@ class Tester
 	std::string color_normal = "\033[0m";  // normal
 
     public:
-	Tester(size_t expected_tests)
-	{
-		functions.reserve(expected_tests);
-	}
-
 	void add_test(const std::string &test_name, TestSignature test)
 	{
 		functions.push_back(std::make_pair(test_name, test));
