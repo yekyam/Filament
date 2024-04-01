@@ -1,3 +1,5 @@
+#pragma once
+
 #include <functional>
 #include <iostream>
 #include <string>
@@ -33,6 +35,7 @@ class Tester
 
 	bool run_all_tests()
 	{
+		std::cout << "\n===== Start of Tests =====\n";
 		int num_test_passed = 0;
 		for (auto it = functions.begin(); it != functions.end(); it++)
 		{
@@ -47,6 +50,7 @@ class Tester
 				std::cout << color_fail << "Failed:(" << color_normal << '\n';
 			}
 		}
+		std::cout << "===== End of Tests =====\n\n";
 		std::cout << "Passed " << num_test_passed << " out of " << functions.size() << " tests.\n";
 		return num_test_passed == functions.size();
 	}

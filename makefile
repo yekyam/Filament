@@ -1,5 +1,5 @@
 SOURCES = source/src/*
-TEST_SOURCES = source/src/tests/*
+TEST_SOURCES = source/tests/*.cpp
 STANDARD = -std=c++20
 DEBUG_BUILD_FLAGS = -g -Wall -Werror
 LIBARIES = -lglew
