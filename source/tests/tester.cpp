@@ -1,12 +1,53 @@
-#include "../include/Components.hpp"
-#include "../include/EntityManager.hpp"
-#include "../include/Filament.hpp"
-#include "../include/GameState.hpp"
-#include "../include/Macros.hpp"
-
+#include <functional>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 /*
- * Every test should return a bool - true for success, false for failure
+ * all functions must return bool and must take no arguments
+ * tester object - wrapper around vec of functions
+ * register a test - aka add to the vec of functions a function
+ * run all tests - aka run all functions in the vec and check for success (true)
  */
-int main()
+
+using TestSignature = std::function<bool()>;
+
+class Tester
 {
-}
+    private:
+	std::vector<std::pair<std::string, TestSignature>> functions;
+	std::string color_fail = "\033[31m";   // red
+	std::string color_passed = "\033[32m"; // green
+	std::string color_normal = "\033[0m";  // normal
+
+    public:
+	Tester(size_t expected_tests)
+	{
+		functions.reserve(expected_tests);
+	}
+
+	void add_test(const std::string &test_name, TestSignature test)
+	{
+		functions.push_back(std::make_pair(test_name, test));
+	}
+
+	bool run_all_tests()
+	{
+		int num_test_passed = 0;
+		for (auto it = functions.begin(); it != functions.end(); it++)
+		{
+			std::cout << "Result of test " << it->first << ": ";
+			bool result = it->second();
+			if (result)
+			{
+				std::cout << color_passed << "Passed" << color_normal << '\n';
+				num_test_passed++;
+			} else
+			{
+				std::cout << color_fail << "Failed:(" << color_normal << '\n';
+			}
+		}
+		std::cout << "Passed " << num_test_passed << " out of " << functions.size() << " tests.\n";
+		return num_test_passed == functions.size();
+	}
+};
