@@ -18,6 +18,12 @@ Why ECS? I prefer composition over inheritance, and I'd like to play around with
 - GLFW
 - OpenGL 3.3
 
+## Supported Platforms
+- [x] Mac (x86_64)
+- [ ] Max (ARM)
+- [ ] Windows
+- [ ] Linux
+
 
 
 
