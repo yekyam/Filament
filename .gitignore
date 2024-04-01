@@ -1,4 +1,6 @@
 .vscode/*
 main.dSYM/*
-main
 tester.dSYM/*
+
+main
+tester
