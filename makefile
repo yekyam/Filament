@@ -11,7 +11,7 @@ build_release:
 	g++ -O3 $(STANDARD) $(LIBRARIES) $(SOURCES) source/main.cpp -o main 
 
 build_test:
-	g++ $(DEBUG_BUILD_FLAGS) $(STANDARD) $(LIBARIES) $(SOURCES) $(TEST_SOURCES) -o tester
+	g++ $(DEBUG_BUILD_FLAGS) $(STANDARD) $(LIBRARIES) $(SOURCES) $(TEST_SOURCES) -o tester
 
 release: build_release
 	./main

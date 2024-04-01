@@ -131,4 +131,14 @@ bool test_deleted_entity_components_are_gone()
 	return true;
 }
 
+bool test_filament_setup()
+{
+	Filament f;
+	auto status_code = f.setup(200, 200);
+
+	bool success = status_code == Filament::FilamentErrors::Success;
+	f.cleanup();
+	return success;
+}
+
 } // namespace Tests
