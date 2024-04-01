@@ -38,12 +38,12 @@ bool EntityManager::entity_available(EntityHandle e)
 
 void EntityManager::destroy_entity(EntityHandle e)
 {
-#ifdef DEBUG
-	this->game_state.model_components.at(e) = std::nullopt;
-#else
-
-	this->game_state.model_components[e] = std::nullopt;
-#endif
+	/* iterate over every component vec and set vec[e] = nullopt
+	 */
+	for (auto it : this->game_state.components)
+	{
+		it.second[e] = std::nullopt;
+	}
 
 	this->available_handles.push_front(e);
 	num_entities--;

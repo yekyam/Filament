@@ -46,30 +46,35 @@ class EntityManager
 template <typename T>
 EntityManager::EntityManagerErrors EntityManager::add_component_to_entity(EntityHandle e, const T &component)
 {
+
+	/* Steps to check if can add componnts to entity
+		1) Entity must exist
+		2) Component must exist
+		3) Entity must not already have component
+		4) If 1-3 are true, add component to entity
+	 */
+
+	// 1
 	if (this->entity_available(e))
 	{
 		return EntityManager::EntityManagerErrors::EntityDoesNotExist;
 	}
 
-	if (typeid(T).name() == typeid(Mesh).name())
-	{
-
-#ifdef DEBUG
-		auto &m = this->game_state.model_components.at(e);
-#else
-		auto &m = this->game_state.model_components[e];
-#endif
-		if (m.has_value())
-		{
-			return EntityManager::EntityManagerErrors::EntityAlreadyHasThisComponent;
-		}
-
-		m = component;
-
-	} else
+	auto component_key = typeid(component).name();
+	// 2
+	if (!this->game_state.components.contains(component_key))
 	{
 		return EntityManager::EntityManagerErrors::ComponentDoesNotExist;
 	}
+
+	// 3
+	auto &opt = this->game_state.components[component_key].at(e);
+	if (opt.has_value())
+	{
+		return EntityManager::EntityManagerErrors::EntityAlreadyHasThisComponent;
+	}
+
+	opt = component;
 
 	return EntityManager::EntityManagerErrors::Success;
 }

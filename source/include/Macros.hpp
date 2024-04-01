@@ -1,3 +1,3 @@
 #pragma once
 
-#define stringize(name) #name
+#define STRINGIFY(name) #name
