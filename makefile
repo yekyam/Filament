@@ -1,4 +1,5 @@
 SOURCES = source/src/*
+TEST_SOURCES = source/src/tests/*
 STANDARD = -std=c++20
 DEBUG_BUILD_FLAGS = -g -Wall -Werror
 LIBARIES = -lglew
@@ -9,7 +10,7 @@ build_release:
 	g++ -O3 $(STANDARD) $(LIBRARIES) $(SOURCES) source/main.cpp -o main 
 
 build_test:
-	g++ $(DEBUG_BUILD_FLAGS) $(STANDARD) $(LIBARIES) $(SOURCES) source/tests/test.cpp -o tester
+	g++ $(DEBUG_BUILD_FLAGS) $(STANDARD) $(LIBARIES) $(SOURCES) $(TEST_SOURCES) -o tester
 
 release: build_release
 	./main
