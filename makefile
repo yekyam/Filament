@@ -1,8 +1,9 @@
+# MAKEFILE FOR MAC
 SOURCES = source/src/*
 TEST_SOURCES = source/tests/*.cpp
 STANDARD = -std=c++20
 DEBUG_BUILD_FLAGS = -g -Wall -Werror
-LIBARIES = -lglew
+LIBRARIES = -lglew -lglfw -framework OpenGL
 
 default: release
 
