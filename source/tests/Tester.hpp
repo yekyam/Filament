@@ -5,6 +5,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+
 /*
  * all functions must return bool and must take no arguments
  * tester object - wrapper around vec of functions
