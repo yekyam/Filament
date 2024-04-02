@@ -23,7 +23,7 @@ class EntityManager
 	bool entity_available(EntityHandle e);
 
     public:
-	/* Specifies types of errors some EntityManager functions can return.
+	/** Specifies types of errors some EntityManager functions can return.
 	 * Zero is success.
 	 */
 	enum class EntityManagerErrors {
@@ -33,26 +33,26 @@ class EntityManager
 		ComponentDoesNotExist
 	};
 
-	/* Creates and sets up the EntityManager.
+	/** Creates and sets up the EntityManager.
 	 * \param max_entities The maximum number of entities this EntityManager can create.
 	 */
 	EntityManager(uint32_t max_entities);
 
-	/* Attempts to get a new entity.
+	/** Attempts to get a new entity.
 	 * Entities handles are pulled from a queue.
 	 * \return An optional. If the optional has a value, it will hold a handle of an Entity.
 	 */
 	std::optional<EntityHandle> get_new_entity();
 
-	/* Gets the current number of entities.
+	/** Gets the current number of entities.
 	 */
 	uint32_t get_num_entities();
 
-	/* Gets the maximum number of entities, set by the constructor.
+	/** Gets the maximum number of entities, set by the constructor.
 	 */
 	uint32_t get_max_entities();
 
-	/* Adds a component to a given entity.
+	/** Adds a component to a given entity.
 	 * \param e The handle of an entity to add a component.
 	 * \param component The component to add to the entity.
 	 * \return Zero is success, other errors are detailed in the `EntityManagerErrors` enum class.
@@ -60,7 +60,7 @@ class EntityManager
 	template <typename T>
 	EntityManagerErrors add_component_to_entity(EntityHandle e, const T &component);
 
-	/* Destroys an entity.
+	/** Destroys an entity.
 	 * Destuction of an entity removes all of its components and adds the handle to the front of the entity handle
 	 * queue.
 	 * \param e The handle to the entity to destroy.
