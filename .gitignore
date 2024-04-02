@@ -1,6 +1,8 @@
 .vscode/*
 main.dSYM/*
 tester.dSYM/*
+docs/*
 
+Doxyfile
 main
 tester
