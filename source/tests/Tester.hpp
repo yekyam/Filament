@@ -1,7 +1,9 @@
 #pragma once
 
+#include <algorithm>
 #include <functional>
 #include <iostream>
+#include <set>
 #include <string>
 #include <utility>
 #include <vector>
@@ -19,6 +21,8 @@ class Tester
 {
     private:
 	std::vector<std::pair<std::string, TestSignature>> functions;
+	std::set<std::string> test_names;
+
 	std::string color_fail = "\033[31m";   // red
 	std::string color_passed = "\033[32m"; // green
 	std::string color_normal = "\033[0m";  // normal
@@ -26,7 +30,12 @@ class Tester
     public:
 	void add_test(const std::string &test_name, TestSignature test)
 	{
-		functions.push_back(std::make_pair(test_name, test));
+		if (this->test_names.contains(test_name))
+		{
+			std::cerr << "Warn: Duplicate test registered"; // logging thing
+		}
+		this->functions.push_back(std::make_pair(test_name, test));
+		this->test_names.insert(test_name);
 	}
 
 	bool run_all_tests()

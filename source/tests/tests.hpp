@@ -11,6 +11,8 @@
 
 #undef private
 
+// todo: add more in-depth rationale
+
 namespace Tests {
 /* Tests List:
  * 	- be able to create an entity with no issues
@@ -20,6 +22,7 @@ namespace Tests {
  *  - destory an entity
  *  - check if an entity exists
  *  - check if deleted entity is free of vecs
+ *  - add a system and run it
  */
 
 bool test_null_test()

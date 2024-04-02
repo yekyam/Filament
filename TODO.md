@@ -15,3 +15,4 @@
 - [ ] Ability to get component of an entity
 - [ ] **IMPORTANT** get good build system
 - [ ] look into bgfx/diigent 
+- [ ] add tests for systems
