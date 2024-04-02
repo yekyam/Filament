@@ -48,3 +48,26 @@ void EntityManager::destroy_entity(EntityHandle e)
 	this->available_handles.push_front(e);
 	num_entities--;
 }
+
+void EntityManager::add_system(System s)
+{
+	this->systems.push_back(s);
+}
+
+EntityManager::EntityManagerErrors EntityManager::run_systems()
+{
+	bool success = true;
+	for (const auto &f : this->systems)
+	{
+		if (!f(this->game_state))
+		{
+			success = false;
+		}
+	}
+
+	if (success)
+	{
+		return EntityManager::EntityManagerErrors::Success;
+	}
+	return EntityManager::EntityManagerErrors::SystemsEncounteredError;
+}

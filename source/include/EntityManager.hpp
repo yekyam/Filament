@@ -6,10 +6,12 @@
 
 #include <algorithm>
 #include <deque>
+#include <functional>
 #include <optional>
 #include <unordered_map>
 
 using EntityHandle = uint32_t;
+using System = std::function<bool(GameState &)>;
 
 class EntityManager
 {
@@ -17,6 +19,8 @@ class EntityManager
 	uint32_t num_entities;
 	uint32_t max_entities;
 	std::deque<EntityHandle> available_handles;
+	std::vector<System> systems;
+
 	// TODO: make another queue for recently deleted ones to really avoid defrag.
 
 	GameState game_state;
@@ -33,6 +37,7 @@ class EntityManager
 		EntityDoesNotExist,
 		ComponentDoesNotExist,
 		ComponentAlreadyExists,
+		SystemsEncounteredError
 	};
 
 	/** Creates and sets up the EntityManager.
@@ -73,7 +78,18 @@ class EntityManager
 	 * \param template The Component to add
 	 */
 	template <typename T>
-	EntityManagerErrors add_component();
+	EntityManagerErrors add_component(); // rename pls
+
+	/** Adds a system to the list of systems.
+	 *  A system is any function or functor that takes in a GameState and returns a bool (true for success).
+	 * @param f A system
+	 */
+	void add_system(System f);
+
+	/** Runs all of the registered systems
+	 * @return Returns EntityManagerErrors::Success if all systems ran succesfully.
+	 */
+	EntityManagerErrors run_systems();
 };
 
 // templates
