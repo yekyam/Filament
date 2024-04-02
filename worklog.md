@@ -9,5 +9,7 @@ What I did and when I did it
 - Setup testing framework
 
 ### Up Next:
+- Comment code properly
+- Setup Doxygen (or something like that) 
 - Setup a way to add systems to be ran
 - Get renderer system to do *anything*

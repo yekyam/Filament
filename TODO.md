@@ -4,8 +4,9 @@
 - [ ] Finish Renderer System \- Be able to take a mesh (aka set of coords and textures) and render to screen using OpenGL 3.3
 - [ ] Make logger: error,warning,info,etc 
 - [ ] Migrate to CMake instead of Make
-- [x] Finish systems management
+- [ ] Finish systems management
 - [ ] Make Vulkan System
 - [ ] Make Asset Manager
 - [ ] Make Input System
 - [ ] Make Sound System
+- [ ] Add Bullet (the library) 
