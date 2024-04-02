@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <vector>
 
 #include "Vertex.hpp"
@@ -14,7 +14,9 @@ struct Mesh
 	std::vector<Vertex> vertices;
 	std::vector<GLushort> indices;
 
-	Mesh(std::vector<Vertex> vertices, std::vector<GLushort> indices) : vertices(vertices), indices(indices) {}
+	Mesh(std::vector<Vertex> vertices, std::vector<GLushort> indices) : vertices(vertices), indices(indices)
+	{
+	}
 
 	template <size_t vertex_num, size_t index_count>
 	Mesh(std::array<GLfloat, vertex_num> positions,

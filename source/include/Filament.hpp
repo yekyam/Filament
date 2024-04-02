@@ -2,9 +2,9 @@
 
 #include "EntityManager.hpp"
 
-#define GLEW_STATIC
-#include <GL/glew.h>
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
 #include <iostream>
 
 class Filament
@@ -18,7 +18,7 @@ class Filament
 	enum class FilamentErrors {
 		Success = 0,
 		UnableToInitGLFW,
-		UnableToInitGLEW,
+		UnableToInitGLAD,
 		UnableToSetupWindow,
 		UnableToSetupOpenGL,
 	};

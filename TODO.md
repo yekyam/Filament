@@ -13,3 +13,5 @@
 - [ ] Add a recently deleted entity queue (getting a new entity should check this queue first before the main one. )
 - [ ] Destroy entity should return something (maybe?)
 - [ ] Ability to get component of an entity
+- [ ] **IMPORTANT** get good build system
+- [ ] look into bgfx/diigent 

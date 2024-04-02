@@ -7,7 +7,10 @@ Filament::Filament() : window(nullptr), screen_width(0), screen_height(0)
 Filament::FilamentErrors Filament::setup(size_t WIDTH, size_t HEIGHT, const std::string &window_title)
 {
 	// init glfw
-	glfwInit();
+	if (!glfwInit())
+	{
+		return FilamentErrors::UnableToInitGLFW;
+	}
 
 	// init opengl to version 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -29,10 +32,10 @@ Filament::FilamentErrors Filament::setup(size_t WIDTH, size_t HEIGHT, const std:
 
 	glfwMakeContextCurrent(this->window);
 
-	// init glew
-	if (GLEW_OK != glewInit())
+	// setup glad
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		return FilamentErrors::UnableToInitGLEW;
+		return FilamentErrors::UnableToInitGLAD;
 	}
 
 	// setup opengl viewport

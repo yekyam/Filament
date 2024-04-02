@@ -13,7 +13,7 @@ Filament prioritizes ease of development and ease of extensibility over performa
 
 ## Dependencies
 - Make
-- GLEW
+- Glad
 - GLFW
 - OpenGL 3.3
 

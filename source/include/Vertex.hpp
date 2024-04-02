@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GL/glew.h>
 #include <array>
+#include <glad/glad.h>
 #include <iostream>
 
 /**
@@ -13,7 +13,9 @@ struct Vertex
 	std::array<GLfloat, 3> position;
 	std::array<GLfloat, 3> color;
 
-	Vertex(std::array<GLfloat, 3> position, std::array<GLfloat, 3> color) : position(position), color(color) {}
+	Vertex(std::array<GLfloat, 3> position, std::array<GLfloat, 3> color) : position(position), color(color)
+	{
+	}
 
 	friend std::ostream &operator<<(std::ostream &o, const Vertex &v)
 	{
