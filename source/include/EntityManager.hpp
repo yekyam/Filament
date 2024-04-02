@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Common.hpp"
 #include "Components.hpp"
 #include "GameState.hpp"
 
@@ -30,7 +31,8 @@ class EntityManager
 		Success = 0,
 		EntityAlreadyHasThisComponent,
 		EntityDoesNotExist,
-		ComponentDoesNotExist
+		ComponentDoesNotExist,
+		ComponentAlreadyExists,
 	};
 
 	/** Creates and sets up the EntityManager.
@@ -66,6 +68,12 @@ class EntityManager
 	 * \param e The handle to the entity to destroy.
 	 */
 	void destroy_entity(EntityHandle e);
+
+	/** Adds a component to the current game state.
+	 * \param template The Component to add
+	 */
+	template <typename T>
+	EntityManagerErrors add_component();
 };
 
 // templates
@@ -87,6 +95,7 @@ EntityManager::EntityManagerErrors EntityManager::add_component_to_entity(Entity
 	}
 
 	auto component_key = typeid(component).name();
+
 	// 2
 	if (!this->game_state.components.contains(component_key))
 	{
@@ -103,4 +112,16 @@ EntityManager::EntityManagerErrors EntityManager::add_component_to_entity(Entity
 	opt = component;
 
 	return EntityManager::EntityManagerErrors::Success;
+}
+
+template <typename T>
+EntityManager::EntityManagerErrors EntityManager::add_component()
+{
+	bool component_in_variant = isVariantMember<T, Component>::value;
+	if (component_in_variant)
+	{
+		this->game_state.add_component<T>();
+		return EntityManager::EntityManagerErrors::Success;
+	}
+	return EntityManager::EntityManagerErrors::ComponentDoesNotExist;
 }

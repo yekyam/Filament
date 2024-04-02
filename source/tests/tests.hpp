@@ -3,11 +3,11 @@
 // veryyyy hacky, but works
 #define private public
 
+#include "../include/Common.hpp"
 #include "../include/Components.hpp"
 #include "../include/EntityManager.hpp"
 #include "../include/Filament.hpp"
 #include "../include/GameState.hpp"
-#include "../include/Macros.hpp"
 
 #undef private
 
@@ -67,6 +67,7 @@ bool test_entity_exists()
 bool test_add_mesh_component_to_entity()
 {
 	EntityManager world(1);
+	world.add_component<Mesh>();
 	auto e = world.get_new_entity();
 
 	if (!e.has_value())
@@ -84,6 +85,7 @@ bool test_add_mesh_component_to_entity()
 bool test_add_duplicate_component_to_entity()
 {
 	EntityManager world(1);
+	world.add_component<Mesh>();
 	auto e = world.get_new_entity();
 
 	if (!e.has_value())
@@ -108,6 +110,7 @@ bool test_add_duplicate_component_to_entity()
 bool test_deleted_entity_components_are_gone()
 {
 	EntityManager world(1);
+	world.add_component<Mesh>();
 	auto e = world.get_new_entity();
 
 	if (!e.has_value())
